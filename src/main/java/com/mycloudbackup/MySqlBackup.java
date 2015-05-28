@@ -51,16 +51,17 @@ public class MySqlBackup {
     /**
      * Restore the backup into a local database
      *
-     * @param dbUserName - user name
-     * @param dbPassword - password
-     * @param source - backup file
+     * @param user - user name
+     * @param password - password
+     * @param dbname - database name
+     * @param backupfile - backup file
      * @return the status true/false
      */
-    public boolean restoreDatabase(String user, String password, String backupfile) {
+    public boolean restoreDatabase(String user, String password, String dbname,String backupfile) {
         Boolean status = false;
 
         //String executeCmd = "/Applications/MAMP/Library/bin/mysql" + " -u " + user + " -p" + password + " mypokerlab < " + backupfile;
-        String[] executeCmd = new String[]{"/Applications/MAMP/Library/bin/mysql", "mypokerlab", "-u" + user, "-p" + password, "-e", " source " + backupfile};
+        String[] executeCmd = new String[]{"/Applications/MAMP/Library/bin/mysql", dbname, "-u" + user, "-p" + password, "-e", " source " + backupfile};
 
         Process runtimeProcess;
         try {

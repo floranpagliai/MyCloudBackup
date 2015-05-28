@@ -20,7 +20,7 @@ public class DatabaseController {
     public String dumpDatabase(ModelMap model) {
         MySqlBackup backup = new MySqlBackup();
 
-        Boolean res = backup.backupDatabase("localhost", "8889", "root", "root", "chazel2", "/Users/floran/Dropbox/Projets/MyCloudBackup/test.sql");
+        Boolean res = backup.backupDatabase("localhost", "8889", "root", "root", "wineot", "/Users/floran/Dropbox/Projets/MyCloudBackup/test.sql");
         if (res) {
             model.addAttribute("message", "Database dumped");
         } else {
@@ -34,7 +34,7 @@ public class DatabaseController {
     public String restoreDatabase(ModelMap model) throws IOException, InterruptedException {
         MySqlBackup backup = new MySqlBackup();
 
-        Boolean res = backup.restoreDatabase("root", "root", "/Users/floran/Dropbox/Projets/MyCloudBackup/test.sql");
+        Boolean res = backup.restoreDatabase("root", "root", "wineot", "/Users/floran/Dropbox/Projets/MyCloudBackup/test.sql");
         if (res) {
             model.addAttribute("message", "Database restored");
         } else {
