@@ -29,7 +29,7 @@ public class MySqlBackup {
      */
     public boolean backupDatabase(String host, String port, String user, String password, String db, String backupfile) {
         Boolean status = false;
-        String executeCmd = "/Applications/MAMP/Library/bin/mysqldump -u" + user + " -p" + password + " " + db + " -r" + backupfile;
+        String executeCmd = "/Applications/MAMP/Library/bin/mysqldump -u " + user + " -p" + password + " --opt " + db + " -r" + backupfile;
 
         Process runtimeProcess = null;
         try {
@@ -56,19 +56,18 @@ public class MySqlBackup {
      * @param source - backup file
      * @return the status true/false
      */
-    public boolean restoreDatabase(String dbUserName, String dbPassword, String source) {
+    public boolean restoreDatabase(String user, String password, String backupfile) {
         Boolean status = false;
 
-        String[] executeCmd = new String[]{"mysql", "--user=" + dbUserName, "--password=" + dbPassword, "-e", "source " + source};
+        //String executeCmd = "/Applications/MAMP/Library/bin/mysql" + " -u " + user + " -p" + password + " mypokerlab < " + backupfile;
+        String[] executeCmd = new String[]{"/Applications/MAMP/Library/bin/mysql", "mypokerlab", "-u" + user, "-p" + password, "-e", " source " + backupfile};
 
         Process runtimeProcess;
         try {
             runtimeProcess = Runtime.getRuntime().exec(executeCmd);
             int processComplete = runtimeProcess.waitFor();
-
             if (processComplete == 0) {
                 status = true;
-                return true;
             } else {
                 status = false;
             }
